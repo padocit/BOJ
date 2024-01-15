@@ -1,3 +1,4 @@
+// 버전1
 #include <iostream>
 
 using namespace std;
@@ -21,11 +22,7 @@ int main()
 }
 
 /*
-다른 버전!
-#include <iostream>
-
-using namespace std;
-
+버전2
 int main()
 {
 	int H, M, total;
