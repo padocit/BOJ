@@ -7,11 +7,9 @@ int main()
 	int N;
 	cin >> N;
 
-	int count = 0;
-	int i = 1;
-	int x = 1;
-	while (x < N) x += 6 * i++;
-	count = count + i;
+	int count = 1;
+	int num = 1;
+	while (num < N) num += 6 * count++;
 	cout << count << endl;
 	return 0;
 }
