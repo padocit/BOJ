@@ -1,5 +1,14 @@
+/*
+<Procedure>
+1. max_h ~ min_h 범위의 높이 h
+2. for(h), 높이 h(key 변수)로 맞출때 시간(cost) 비교 : 
+	(높아질 블럭 수) cost + (낮아질 블럭 수 * 2) cost
+	그러나 만약 가진 블럭수(B)가 받춰주지 않으면 탈락 
+3. 가장 빠른 case로 실행!
+	**만약 cost 같을 시 가장 높은 h	
+*/
+
 #include <iostream>
-#include <cmath>
 #include <climits>
 
 using namespace std;
