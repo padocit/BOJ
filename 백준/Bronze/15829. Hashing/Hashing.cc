@@ -5,17 +5,21 @@ using namespace std;
 
 int hash_func(char* s, int size)
 {
-	int r = 31;
 	int M = 1234567891;
-
 	int key = 0;
-	long double sum = 0;
+	long long sum = 0;
 	for (int i = 0; i < size; i++)
 	{
-		double c = s[i] - 'a' + 1; // 1 ~ 26
-		sum += c * pow(r, i);
+		long long r = 1;
+		int c = s[i] - 'a' + 1; // 1 ~ 26
+		for (int k = 0; k < i; k++)
+		{
+			r *= 31;
+			if (r > M) r %= M; 
+		}
+		sum += c * r;
 	}
-	key = fmodl(sum, M);
+	key = sum % M;
 	
 	return key;
 }
