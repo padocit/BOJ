@@ -1,31 +1,33 @@
 #include <iostream>
-#include <string>
 #include <cmath>
 
 using namespace std;
 
-int hash_func(string s)
+int hash_func(char* s, int size)
 {
 	int r = 31;
 	int M = 1234567891;
 
-	int sum = 0;
-	for (int i = 0; i < s.length(); i++)
+	int key = 0;
+	long double sum = 0;
+	for (int i = 0; i < size; i++)
 	{
-		int c = s.at(i) - 'a' + 1; // 1 ~ 26
-		sum += (c * int(pow(r, i))) % M; 
+		double c = s[i] - 'a' + 1; // 1 ~ 26
+		sum += c * pow(r, i);
 	}
-	return sum;
+	key = fmodl(sum, M);
+	
+	return key;
 }
 
 int main()
 {
 	int L;
 	cin >> L;
-	string s;
+	char* s = new char[L];
 	cin >> s; // 소문자
 	
-	int key = hash_func(s);
+	int key = hash_func(s, L);
 	cout << key << endl;
 	return 0;
 }
