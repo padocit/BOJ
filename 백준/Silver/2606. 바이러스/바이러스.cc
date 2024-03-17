@@ -23,21 +23,20 @@ int main()
 		pc[b - 1][a - 1] = 1;
 	}
 
-	bool checked[100] = { 0, };
+	bool checked[100] = { 0, }; // queue에 넣은 적 있는 숫자는 다시 넣지 않는다.
 	queue<int> q;
-	q.push(0);
-	checked[0] = 1;
+	q.push(0); checked[0] = 1;
 	int count = 0;
 	while (!q.empty())
 	{
 		int a = q.front();
 		q.pop();
 
-		for (int b = 0; b < N; b++)
+		for (int b = 0; b < N; b++)  // b의 초기값 주의
 			if (pc[a][b] == 1 && !checked[b])
 			{
 				q.push(b);
-				count++;
+				count++;  // queue에 push 되는 숫자들은 모두 바이러스에 걸리는 셈이다.
 				checked[b] = 1;
 			}
 	}
