@@ -3,38 +3,27 @@
 
 using namespace std;
 
+int dp[50001];
+
 int main()
 {
 	ios::sync_with_stdio(0);
 	cin.tie(0); cout.tie(0);
 
+	for (int z = 1; z <= sqrt(50000); z++)
+		dp[z*z] = 1;
+
+	for (int i = 0; i <= 50001; i++)
+		for (int k = 0; k*k <= i; k++)
+		{
+			if (dp[i] == 0)
+				dp[i] = dp[k * k] + dp[i - k * k];
+			else
+				dp[i] = min(dp[i], dp[k * k] + dp[i - k * k]);
+		}
+
 	int n;
 	cin >> n;
-
-	int z = int(sqrt(n));
-	int A = int(sqrt(n) / 2);
-	int count = 4;
-	for (int a = z; a > A; a--) 
-	{
-		for (int b = a; b >= 0; b--)
-			for (int c = b; c >= 0; c--)
-				for (int d = c; d >= 0; d--)
-				{
-					//if (a * a + b * b + c * c + d * d == n)
-					//{
-					//	cout << "발견! (a,b,c,d) : " << a << ' '
-					//		<< b << ' ' << c << ' ' << d << '\n';
-					//}
-					if (a * a == n) 
-						count = min(count, 1);
-					else if (a * a + b * b == n) 
-						count = min(count, 2);
-					else if (a * a + b * b + c * c == n) 
-						count = min(count, 3);
-					else if (a * a + b * b + c * c + d * d == n) 
-						count = min(count, 4);
-				}
-	}
-	cout << count;
+	cout << dp[n];
 	return 0;
 }
