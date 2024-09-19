@@ -1,131 +1,57 @@
-#include <iostream>
-#include <string>
-#include <cassert>
-#include <cstring>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-// only int
-class myqueue
-{
-public:
-	myqueue()
-	{
-		q_ = new int[capacity_];
-	}
-
-	void resize()
-	{
-		int* temp = new int[capacity_ * 2];
-		int start = front_ + 1;
-		memcpy(temp + 1, q_ + start, (capacity_ - start) * sizeof(int));
-		if (rear_ < front_)
-			memcpy(temp + 1 + (capacity_ - start), q_, front_ * sizeof(int));
-		
-		delete[] q_;
-		q_ = temp;
-		rear_ = size();
-		front_ = 0;
-		capacity_ *= 2;
-	}
-
-	bool isEmpty()
-	{
-		return front_ == rear_;
-	}
-
-	bool isFull()
-	{
-		return (rear_ + 1) % capacity_ == front_;
-	}
-
-	int size()
-	{
-		if (front_ <= rear_)
-			return rear_ - front_;
-		else
-			return capacity_ - (front_ - rear_);
-	}
-
-	void push(int x)
-	{
-		if (isFull()) resize();
-
-		rear_ = (rear_ + 1) % capacity_;
-		q_[rear_] = x;
-	}
-
-	void pop()
-	{
-		if (isEmpty()) return;
-
-		front_ = (front_ + 1) % capacity_;
-	}
-
-	int front()
-	{
-		if (isEmpty()) return -1;
-
-		return q_[(front_ + 1) % capacity_];
-	}
-
-	int back()
-	{
-		if (isEmpty()) return -1;
-
-		return q_[rear_];
-	}
-
-private:
-	int front_ = 0;
-	int rear_ = 0;
-	int capacity_ = 2;
-	int* q_ = nullptr;
-};
-
 int main()
 {
-	ios::sync_with_stdio(0);
-	cout.tie(0); cin.tie(0);
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
 
-	myqueue q;
-	int N;
+	queue<int> q;
+	unsigned int N;
 	cin >> N;
-
-	string op;
 	while (N-- > 0)
 	{
-		cin >> op;
-		if (op == "push")
+		string cmd;
+		cin >> cmd;
+		if (cmd == "push")
 		{
 			int x;
 			cin >> x;
 			q.push(x);
 		}
-		else if (op == "pop")
+		else if (cmd == "pop")
 		{
-			cout << q.front() << '\n';
-			q.pop();
+			if (q.empty())
+				cout << -1 << '\n';
+			else
+			{
+				int x = q.front();
+				q.pop();
+				cout << x << '\n';
+			}
 		}
-		else if (op == "size")
+		else if (cmd == "size")
 		{
 			cout << q.size() << '\n';
 		}
-		else if (op == "empty")
+		else if (cmd == "empty")
 		{
-			cout << q.isEmpty() << '\n';
+			cout << q.empty() << '\n';
 		}
-		else if (op == "front")
+		else if (cmd == "front")
 		{
-			cout << q.front() << '\n';
+			if (q.empty())
+				cout << -1 << '\n';
+			else
+				cout << q.front() << '\n';
 		}
-		else if (op == "back")
+		else if (cmd == "back")
 		{
-			cout << q.back() << '\n';
-		}
-		else
-		{
-			return -1;
+			if (q.empty())
+				cout << -1 << '\n';
+			else
+				cout << q.back() << '\n';
 		}
 	}
 
