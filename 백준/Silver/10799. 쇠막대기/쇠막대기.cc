@@ -31,3 +31,6 @@ int main()
 	cout << count;
 	return 0;
 }
+
+// 1. stack을 쓰고, '레이저'인지 '막대 끝'인지 구별하기 위한 방법으로 'stick' 변수 대신 string 인덱싱을 사용할수도 있음.
+// 2. stack을 안쓰고, 'stick' 변수만 이용하는 방법도 있음. (str 순회만 하면 가능)
