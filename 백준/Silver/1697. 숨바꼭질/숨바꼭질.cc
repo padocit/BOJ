@@ -9,7 +9,6 @@
 
 using namespace std;
 
-int Pos[100001];
 int T[100001];
 int dx[3] = { -1, 1, 2 };
 
@@ -32,14 +31,8 @@ int main()
 	while (!BFS.empty())
 	{
 		int curPos = BFS.front(); BFS.pop();
-		for (int i = 0; i < 3; i++)
+		for (int nextPos : {curPos - 1, curPos + 1, curPos * 2})
 		{
-			int nextPos;
-			if (dx[i] == 2)
-				nextPos = curPos * 2;
-			else
-				nextPos = curPos + dx[i];
-
 			if (nextPos < 0 || nextPos > 100000) continue;
 			if (T[nextPos] > 0) continue; // 이미 방문
 			BFS.push(nextPos);
